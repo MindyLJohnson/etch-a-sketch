@@ -1,5 +1,8 @@
-function createSquareDivs(numberOfColumns, numberOfRows) {
+function createSquareDivs(gridSize) {
     const container = document.querySelector('.container');
+    const oldNumberOfSquares = container.childElementCount;
+    const numberOfColumns = gridSize;
+    const numberOfRows = gridSize;
     const gridTemplateColumns = `repeat(${(numberOfColumns)}, auto)`;
     const gridTemplateRows = `repeat(${(numberOfRows)}, auto)`;
     const numberOfSquares = numberOfColumns*numberOfRows;
@@ -7,9 +10,13 @@ function createSquareDivs(numberOfColumns, numberOfRows) {
     container.style.gridTemplateColumns = gridTemplateColumns;
     container.style.gridTemplateRows = gridTemplateRows;
 
-    for (let i = 1; i <= numberOfSquares; i++) {
+    for (let i = oldNumberOfSquares; i > numberOfSquares; i--) {
+        container.removeChild(container.lastChild);
+    }
+
+    for (let i = oldNumberOfSquares; i < numberOfSquares; i++) {
         const squareDiv = document.createElement('div');
-        squareDiv.classList = "square-div";
+        squareDiv.classList = 'square-div';
         container.appendChild(squareDiv);
     }
 
@@ -20,10 +27,10 @@ function createSquareDivs(numberOfColumns, numberOfRows) {
 }
 
 function changeSquareColor() {
-    this.style.backgroundColor = "green";
+    this.style.backgroundColor = 'green';
 }
 
-const clearButton = document.querySelector(".clear");
+const clearButton = document.querySelector('.clear');
 clearButton.addEventListener('click', clearSquareColors);
 
 function clearSquareColors() {
@@ -33,4 +40,17 @@ function clearSquareColors() {
     });
 }
 
-createSquareDivs(16, 16);
+function updateGridSize() {
+    clearSquareColors();
+    createSquareDivs(this.value);
+
+    const gridSizeLabel = document.querySelector('#slider-label');
+    gridSizeLabel.textContent = `Grid Size: ${this.value}x${this.value}`;
+}
+
+const gridSizeSlider = document.querySelector('.slider');
+gridSizeSlider.addEventListener('change', updateGridSize);
+createSquareDivs(gridSizeSlider.value);
+
+const gridSizeLabel = document.querySelector('#slider-label');
+gridSizeLabel.textContent = `Grid Size: ${gridSizeSlider.value}x${gridSizeSlider.value}`;
