@@ -27,7 +27,12 @@ function createSquareDivs(gridSize) {
 }
 
 function changeSquareColor() {
-    this.style.backgroundColor = 'green';
+    const randomR = Math.floor(Math.random()*255);
+    const randomG = Math.floor(Math.random()*255);
+    const randomB = Math.floor(Math.random()*255);
+    const randomColor = `rgb(${randomR}, ${randomG}, ${randomB})`;
+
+    this.style.backgroundColor = randomColor;
 }
 
 const clearButton = document.querySelector('.clear');
