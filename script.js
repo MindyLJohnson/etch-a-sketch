@@ -26,4 +26,11 @@ function changeSquareColor() {
 const clearButton = document.querySelector(".clear");
 clearButton.addEventListener('click', clearSquareColors);
 
+function clearSquareColors() {
+    const squareDivs = document.querySelectorAll('.square-div');
+    squareDivs.forEach(squareDiv => {
+        squareDiv.style.backgroundColor = "";
+    });
+}
+
 createSquareDivs(16, 16);
