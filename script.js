@@ -10,9 +10,20 @@ function createSquareDivs(numberOfColumns, numberOfRows) {
     for (let i = 1; i <= numberOfSquares; i++) {
         const squareDiv = document.createElement('div');
         squareDiv.classList = "square-div";
-        squareDiv.innerText = i;
         container.appendChild(squareDiv);
     }
+
+    const squareDivs = document.querySelectorAll('.square-div');
+    squareDivs.forEach(squareDiv => {
+        squareDiv.addEventListener('mouseover', changeSquareColor);
+    });
 }
+
+function changeSquareColor() {
+    this.style.backgroundColor = "green";
+}
+
+const clearButton = document.querySelector(".clear");
+clearButton.addEventListener('click', clearSquareColors);
 
 createSquareDivs(16, 16);
