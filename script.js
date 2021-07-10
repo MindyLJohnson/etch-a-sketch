@@ -1,7 +1,11 @@
-function createSquareDivs(numberOfSquares) {
+function createSquareDivs(numberOfColumns, numberOfRows) {
     const container = document.querySelector('.container');
-    const gridTemplateColumns = `repeat(${Math.sqrt(numberOfSquares)}, auto)`;
+    const gridTemplateColumns = `repeat(${(numberOfColumns)}, auto)`;
+    const gridTemplateRows = `repeat(${(numberOfRows)}, auto)`;
+    const numberOfSquares = numberOfColumns*numberOfRows;
+
     container.style.gridTemplateColumns = gridTemplateColumns;
+    container.style.gridTemplateRows = gridTemplateRows;
 
     for (let i = 1; i <= numberOfSquares; i++) {
         const squareDiv = document.createElement('div');
@@ -11,4 +15,4 @@ function createSquareDivs(numberOfSquares) {
     }
 }
 
-createSquareDivs(16);
+createSquareDivs(16, 16);
